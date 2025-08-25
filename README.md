@@ -3,8 +3,8 @@ Written by: XtendedGreg August 25, 2025 [XtendedGreg Youtube Channel](https://ww
 
 ## Description
 - This guide provides a comprehensive overview of how to convert a Python script into a standalone executable that can be run on other computers without requiring a Python installation. It covers the pros and cons of this approach, a step-by-step tutorial using PyInstaller, and advanced troubleshooting techniques.
-- This script and its use will be covered in this [XtendedGreg Youtube stream](https://youtube.com/live/fBK00EUrMIo).
-[![Watch the video](https://img.youtube.com/vi/fBK00EUrMIo/maxresdefault.jpg)](https://youtube.com/live/fBK00EUrMIo)
+- This script and its use will be covered in this [XtendedGreg Youtube stream](https://youtube.com/live/QvbASIvYSw8).
+[![Watch the video](https://img.youtube.com/vi/QvbASIvYSw8/maxresdefault.jpg)](https://youtube.com/live/QvbASIvYSw8)
 
 ## **Why "Compile" a Python Script?**
 
