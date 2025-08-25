@@ -36,18 +36,23 @@ This example creates a simple GUI application that fetches a quote from an API a
 Always use a virtual environment to avoid bundling unnecessary packages and keep your file size down.
 
 \# Create and activate a virtual environment  
+```
 python \-m venv venv  
 source venv/bin/activate  \# On macOS/Linux  
 \# venv\\Scripts\\activate    \# On Windows
+```
 
-\# Install necessary packages  
+\# Install necessary packages
+```
 pip install pyinstaller requests
+```
 
 ### **2\. Create Your Python Script**
 
 Create a file quote\_app.py with a simple Tkinter GUI. (Refer to the full guide for the complete code). Make sure to include a helper function to handle paths for bundled assets like icons.
 
 \# Key function for handling assets in a frozen app  
+```
 def resource\_path(relative\_path):  
     """ Get absolute path to resource, works for dev and for PyInstaller """  
     try:  
@@ -56,17 +61,20 @@ def resource\_path(relative\_path):
     except Exception:  
         base\_path \= os.path.abspath(".")  
     return os.path.join(base\_path, relative\_path)
+```
 
 ### **3\. Run the PyInstaller Command**
 
 Use the pyinstaller command with flags to customize the build.
 
+```
 pyinstaller \\  
   \--onefile \\         \# Bundle everything into a single .exe  
   \--windowed \\        \# Suppress the console window for a GUI app  
   \--icon="logo.ico" \\   \# Set the application icon  
-  \--add-data="logo.ico;." \\ \# Bundle the icon file as a data asset  
+  \--add-data="logo.ico:." \\ \# Bundle the icon file as a data asset  
   quote\_app.py
+```
 
 ### **4\. Distribute Your App**
 
