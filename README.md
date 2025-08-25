@@ -37,9 +37,9 @@ Always use a virtual environment to avoid bundling unnecessary packages and keep
 
 \# Create and activate a virtual environment  
 ```
-python \-m venv venv  
-source venv/bin/activate  \# On macOS/Linux  
-\# venv\\Scripts\\activate    \# On Windows
+python -m venv venv  
+source venv/bin/activate  # On macOS/Linux  
+# venv\Scripts\activate    # On Windows
 ```
 
 \# Install necessary packages
@@ -68,13 +68,12 @@ def resource\_path(relative\_path):
 Use the pyinstaller command with flags to customize the build.
 
 ```
-pyinstaller \\  
-  \--onefile \\         \# Bundle everything into a single .exe  
-  \--windowed \\        \# Suppress the console window for a GUI app  
-  \--icon="logo.ico" \\   \# Set the application icon  
-  \--add-data="logo.ico:." \\ \# Bundle the icon file as a data asset  
-  quote\_app.py
+pyinstaller --onefile --windowed --icon="logo.ico" --add-data="logo.ico:." quote\_app.py
 ```
+- \--onefile \# Bundle everything into a single .exe  
+- \--windowed \# Suppress the console window for a GUI app  
+- \--icon="logo.ico" \# Set the application icon  
+- \--add-data="logo.ico:." \# Bundle the icon file as a data asset
 
 ### **4\. Distribute Your App**
 
