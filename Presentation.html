@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation: Compiling Python for a Live Stream</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: translateX(100%);
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide.previous {
+            transform: translateX(-100%);
+        }
+        .slide-content {
+            animation: fadeIn 0.8s ease-in-out 0.3s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center h-screen w-screen p-4 md:p-8">
+
+    <div id="presentation-container" class="relative w-full h-full max-w-6xl max-h-[720px] bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+
+        <!-- Slide 1: Title -->
+        <div class="slide active flex-col items-center justify-center text-center p-8" data-slide="1">
+            <div class="slide-content">
+                <h1 class="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 mb-4">Stop Sending `.py` Files!</h1>
+                <p class="text-xl md:text-2xl text-gray-300">The Ultimate Guide to Compiling Python</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="2">
+            <div class="slide-content w-full max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-red-400">The Pain of Sharing Code</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="text-8xl">🐍</div>
+                    <div class="text-4xl text-gray-400">&rarr;</div>
+                    <div class="text-8xl">🤷</div>
+                </div>
+                <p class="text-xl text-gray-300 mt-6">Your friend doesn't have Python. They don't know `pip`. Your app is inaccessible.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Solution -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="3">
+            <div class="slide-content w-full max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-green-400">The Solution: A Standalone Executable</h2>
+                 <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="text-8xl">📦</div>
+                    <div class="text-4xl text-gray-400">&rarr;</div>
+                    <div class="text-8xl">🚀</div>
+                </div>
+                <p class="text-xl text-gray-300 mt-6">Package everything into one professional, double-clickable file.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: What is "Compiling"? -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="4">
+            <div class="slide-content w-full max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-400 text-center">It's Not Compiling, It's "Freezing"</h2>
+                <div class="bg-gray-900 p-6 rounded-lg text-left text-lg space-y-4">
+                    <p>Your `.py` script, all its libraries, and the Python interpreter itself are **bundled** into a self-extracting package.</p>
+                </div>
+                <p class="text-center mt-6 text-amber-400 font-medium">The goal is **distribution**, not performance.</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Pros vs Cons -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="5">
+             <div class="slide-content w-full max-w-5xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Pros vs. Cons</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-green-900/50 p-6 rounded-lg">
+                        <h3 class="font-bold text-2xl text-green-400 mb-4">PROS ✅</h3>
+                        <ul class="space-y-2 text-lg">
+                            <li><strong>Accessible:</strong> Anyone can run it.</li>
+                            <li><strong>Reliable:</strong> Bundled dependencies prevent conflicts.</li>
+                            <li><strong>Protected:</strong> Hides your source code.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-900/50 p-6 rounded-lg">
+                        <h3 class="font-bold text-2xl text-red-400 mb-4">CONS ❌</h3>
+                        <ul class="space-y-2 text-lg">
+                            <li><strong>Huge Files:</strong> Includes the entire interpreter.</li>
+                            <li><strong>Slow Startup:</strong> Must unpack itself first.</li>
+                            <li><strong>Platform-Specific:</strong> Build on Windows for Windows, etc.</li>
+                            <li><strong>Antivirus Issues:</strong> Often gets false-flagged.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: The Golden Rule -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="6">
+            <div class="slide-content w-full max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-amber-400">The Golden Rule</h2>
+                <p class="text-8xl mb-4">🛡️</p>
+                <p class="text-2xl text-gray-200">ALWAYS use a clean **virtual environment**.</p>
+                <p class="text-lg text-gray-400 mt-2">This is the #1 way to prevent a bloated executable.</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Live Demo -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="7">
+            <div class="slide-content w-full max-w-4xl text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-400">Live Demo Time!</h2>
+                <p class="text-2xl text-gray-200">Let's build a "Quote of the Day" app.</p>
+                <div class="mt-8 bg-gray-900 p-4 rounded-lg font-mono text-left text-sm md:text-base text-gray-200">
+                    <p class="text-gray-400"># 1. Create & activate venv</p>
+                    <p class="text-cyan-400">> python -m venv venv</p>
+                    <p class="text-cyan-400">> source venv/bin/activate</p>
+                    <br>
+                    <p class="text-gray-400"># 2. Install packages</p>
+                    <p class="text-cyan-400">(venv) > pip install pyinstaller requests</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: The Build Command -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="8">
+            <div class="slide-content w-full max-w-5xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-400 text-center">The Build Command</h2>
+                <div class="bg-gray-900 p-4 rounded-lg font-mono text-sm md:text-base text-cyan-400">
+                    <p>> pyinstaller --onefile --windowed --icon="logo.ico" --add-data="logo.ico:." quote_app.py</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
+                    <div class="bg-gray-700 p-3 rounded-lg"><p class="font-semibold text-amber-400">--onefile</p><p class="text-sm">Single .exe</p></div>
+                    <div class="bg-gray-700 p-3 rounded-lg"><p class="font-semibold text-amber-400">--windowed</p><p class="text-sm">No console</p></div>
+                    <div class="bg-gray-700 p-3 rounded-lg"><p class="font-semibold text-amber-400">--icon</p><p class="text-sm">Set file icon</p></div>
+                    <div class="bg-gray-700 p-3 rounded-lg"><p class="font-semibold text-amber-400">--add-data</p><p class="text-sm">Bundle assets</p></div>
+                </div>
+				<br />
+				<p class="text-2xl text-gray-200 text-center">Check the "dist" folder in your venv for your finished file.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Pro Tips -->
+        <div class="slide flex-col items-center justify-center p-8 md:p-12" data-slide="10">
+            <div class="slide-content w-full max-w-4xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-green-400 text-center">Pro Tips & Troubleshooting</h2>
+                <ul class="space-y-4 text-xl">
+                    <li><span class="font-semibold text-amber-400">File Size Too Big?</span> Use a free tool called UPX to compress your EXE.</li>
+                    <li><span class="font-semibold text-amber-400">Startup Too Slow?</span> Distribute the faster "one-dir" folder instead.</li>
+                    <li><span class="font-semibold text-amber-400">Antivirus Warning?</span> Use VirusTotal.com to diagnose and report the false positive.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide flex-col items-center justify-center text-center p-8" data-slide="11">
+            <div class="slide-content">
+                <h1 class="text-4xl md:text-5xl font-bold text-blue-400 mb-6">You're Ready to Distribute!</h1>
+                <p class="text-xl md:text-2xl text-gray-300">Go build something awesome and share it with the world.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex items-center justify-between w-full max-w-6xl mt-4">
+        <div id="slide-counter" class="text-gray-400 text-sm font-medium">Slide 1 / 11</div>
+        <div class="flex space-x-2">
+            <button id="prev-btn" class="bg-gray-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                &larr; Prev
+            </button>
+            <button id="next-btn" class="bg-gray-700 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                Next &rarr;
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index, direction) {
+                const oldSlide = slides[currentSlide];
+                oldSlide.classList.remove('active');
+                if (direction === 'next') {
+                    oldSlide.classList.add('previous');
+                } else {
+                    oldSlide.classList.remove('previous');
+                }
+                
+                currentSlide = index;
+                const newSlide = slides[currentSlide];
+                
+                if (direction === 'prev') {
+                    newSlide.classList.remove('previous');
+                }
+                
+                void newSlide.offsetWidth; 
+                
+                newSlide.classList.add('active');
+                
+                updateControls();
+            }
+
+            function updateControls() {
+                slideCounter.textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+                prevBtn.disabled = currentSlide === 0;
+                nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    showSlide(currentSlide + 1, 'next');
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    showSlide(currentSlide - 1, 'prev');
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextBtn.click();
+                else if (e.key === 'ArrowLeft') prevBtn.click();
+            });
+
+            updateControls();
+        });
+    </script>
+</body>
+</html>
